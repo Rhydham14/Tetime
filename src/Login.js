@@ -26,7 +26,7 @@ const Login = () => {
       for (let i = 0; i < users.length; i++) {
         if (users[i].email === credentials.email && credentials.email !=="" && users[i].pswd === credentials.password && credentials.password !=="" ) {
           // console.log("sucess");
-          localStorage.setItem('fname', users[i].fname);
+          sessionStorage.setItem('fname', users[i].fname);
           // locatStorage.seItem('')
           navigate("/dashboard");
 
