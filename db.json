@@ -215,13 +215,38 @@
       "dob": "2024-03-11",
       "country": "United States",
       "state": "California"
+    },
+    {
+      "id": "05d8",
+      "fname": "",
+      "lname": "",
+      "email": "",
+      "pswd": "",
+      "cpswd": "",
+      "contact": "",
+      "dob": "",
+      "country": "",
+      "state": ""
+    },
+    {
+      "id": "17d3",
+      "fname": "rrrr",
+      "lname": "",
+      "email": "",
+      "pswd": "",
+      "cpswd": "",
+      "contact": "",
+      "dob": "",
+      "country": "",
+      "state": ""
     }
   ],
-  "blog":[
+  "blog": [
     {
-      "email":"",
-      "title":"",
-      "description":""
+      "email": "",
+      "title": "",
+      "description": "",
+      "id": "da57"
     }
   ]
 }

@@ -19,8 +19,7 @@ const columns = [
   { field: "title", headerName: "Title" },
   { field: "discription", headerName: "Discription" },
 ];
- const getName = localStorage.getItem('name');
- console.log("###############################",getName);
+
 const Blog = () => {
   return (
     <>
@@ -52,12 +51,10 @@ const Blog = () => {
                       <Link to="/ReadBlog" id="lnk">
                         <button className="btn btn-dark m-2">Read</button>
                       </Link>
-                      {getName !== null && (
-                        <>
+                    
                           <button className="btn btn-success m-2">Update</button>
                           <button className="btn btn-danger m-2">Remove</button>
-                        </>
-                      )}
+                  
                     </div>
                   </tr>
                 ))}
