@@ -1,0 +1,13 @@
+#blog {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    /* background-color: aqua; */
+    /* box-shadow: 3px 2px 4px rgba(201, 201, 201, 0.795); */
+  
+    /* font-size: 100px; */
+    border-radius: 10px;
+  }
+
+  #p{
+    padding: 2.10%;
+}

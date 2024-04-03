@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Signup from './Signup';
-import Dashboard from './Dashboard';
-import Blog from './Blog';
-import ReadBlog from './ReadBlog';
-import NewBlog from './NewBlog';
+import Login from './jsx/Login';
+import Signup from './jsx/Signup';
+import Dashboard from './jsx/Dashboard';
+import Blog from './jsx/Blog';
+import ReadBlog from './jsx/ReadBlog';
+import NewBlog from './jsx/NewBlog';
 
 function App() {
   return (
