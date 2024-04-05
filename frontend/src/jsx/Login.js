@@ -18,25 +18,18 @@ const Login = () => {
     e.preventDefault();
     try {
       // Fetch user data from API
-      const response = await axios.get("http://localhost:3001/users");
-      const users = response.data;
-      // Log the entire response and users array to inspect their structure
-      console.log("Response:", response);
-      console.log("Users:", users);
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].email === credentials.email && credentials.email !=="" && users[i].pswd === credentials.password && credentials.password !=="" ) {
-          // console.log("sucess");
-          sessionStorage.setItem('fname', users[i].fname);
-          // locatStorage.seItem('')
-          navigate("/dashboard");
+      // const response = await axios.get("http://localhost:3001/users");
+      const response = await axios.post("http://localhost:4000/api/users/login", credentials); // Replace with your API endpoint
+      const { success, message, fname } = response.data;
+      if(success){
 
-          return;
-        } else {
-          setError("Invalid email or password");
-          // console.log("unsucess");
-        }
+        sessionStorage.setItem('fname', fname);
+        navigate("/dashboard");
+      }else{
+        return("Login fail",message)
       }
-      // Rest of your code...
+      // Log the entire response and users array to inspect their structur
+          // console.log("sucess");
     } catch (error) {
       console.error("Login failed", error);
       setError("An error occurred while logging in");

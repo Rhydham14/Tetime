@@ -20,6 +20,20 @@ const userService = {
       return e;
     }
   },
+  login: async (userData) =>{
+    try{
+      const user = await User.findOne(userData);
+      if(user){
+        console.log("fjsdjklghjag",user);
+        return { success: true, message: 'Login successful', fname: user.fname };
+      } 
+      else{
+        return { success: true, message: 'Login fail'};
+      }
+    }catch(e){
+      return e ;
+    }
+  }
 };
 
 module.exports = userService;

@@ -15,12 +15,25 @@ const UserController = {
     login: async(req,res)=>{
       try{
         const {email, password}=req.body;
+        console.log("email:",email);
+        console.log("password:",password);
+
+        const userData = await userService.login({email, password});
+        if (userData.success) {
+          // Login successful
+          const { message, fname } = userData;
+          res.status(200).json({ success: true, message, fname });
+        } else {
+          // Login failed
+          const { message } = userData;
+          res.status(401).json({ success: false, message });
+        }
+
       }catch(e){
         console.log("error",e);
         res.status(500).json({ error: 'Internal server error' });
       }
     }
-   
   };
   
   module.exports = UserController;
