@@ -34,7 +34,7 @@ const Signup = () => {
     fname: "",
     lname: "",
     email: "",
-    pswd: "",
+    password: "",
     cpswd: "",
     contact: "",
     dob: "",
@@ -70,14 +70,14 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     try {
-      const response = await axios.post("http://localhost:3001/users", data); // Replace with your API endpoint
+      const response = await axios.post("http://localhost:4000/api/users/register", data); // Replace with your API endpoint
       console.log(response.data); // Handle successful response (optional)
       setData({
         // Reset form data after successful submission
         fname: "",
         lname: "",
         email: "",
-        pswd: "",
+        password: "",
         cpswd: "",
         contact: "",
         dob: "",
@@ -164,8 +164,8 @@ const Signup = () => {
                   class="form-control"
                   id="password"
                   placeholder="Password"
-                  name="pswd"
-                  value={data.pswd}
+                  name="password"
+                  value={data.password}
                   onChange={handleChange}
                 />
               </div>
