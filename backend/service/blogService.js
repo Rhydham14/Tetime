@@ -5,7 +5,7 @@ const blogService ={
         try{
             const writeblog = await Blog.create({
                 title:blogData.title,
-                discrpition: blogData.discrpition
+                discription: blogData.discription
             });
             return blogData;
         }catch (e){

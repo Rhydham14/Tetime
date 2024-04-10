@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../images/free-avatar-380-456332.png";
 import "../css/Sidebar.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const img = {
   height: "150px",
@@ -16,12 +16,11 @@ const Sidebar = () => {
   const storedFname = sessionStorage.getItem("fname");
   console.log("----------------", storedFname);
 
-  const handleLogout =()=>{
-    const name =sessionStorage.removeItem('fname');
-  console.log("@@@@@", name);
-  localStorage.getItem('name', name);
-
-  }
+  const handleLogout = () => {
+    const name = sessionStorage.removeItem("fname");
+    console.log("@@@@@", name);
+    localStorage.getItem("name", name);
+  };
   console.log("*****************", storedFname);
 
   return (
@@ -44,39 +43,42 @@ const Sidebar = () => {
             Dashboard
           </Link>
         </li>
-        <li id="list" className="nav-item active ">
-          <Link
-            to="/blog"
-            id="link"
-            className="nav-link demo text-dark text-md"
-          >
-            Blog
-          </Link>
-        </li>
-        {storedFname !== null ? (
-                  <li id="list" className="nav-item active ">
-                  <Link
-                    to="/dashboard"
-                    id="link"
-                    className="nav-link demo text-white bg-danger text-md"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </Link>
-                </li>
-        ):(
-          <li id="list" className="nav-item active ">
-          <Link
-            to="/"
-            id="link"
-            className="nav-link demo text-white bg-danger text-md"
-            onClick={handleLogout}
-          >
-            Login
-          </Link>
-        </li>
-        )}
 
+        {storedFname !== null ? (
+          <>
+            <li id="list" className="nav-item active ">
+              <Link
+                to="/blog"
+                id="link"
+                className="nav-link demo text-dark text-md"
+              >
+                Blog
+              </Link>
+            </li>
+
+            <li id="list" className="nav-item active ">
+              <Link
+                to="/dashboard"
+                id="link"
+                className="nav-link demo text-white bg-danger text-md"
+                onClick={handleLogout}
+              >
+                Logout
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li id="list" className="nav-item active ">
+            <Link
+              to="/"
+              id="link"
+              className="nav-link demo text-white bg-danger text-md"
+              onClick={handleLogout}
+            >
+              Login
+            </Link>
+          </li>
+        )}
       </nav>
     </div>
   );

@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link } from "react-router-dom";
 import '../css/NewBlog.css';
 
-
 const NewBlog = ()=>{
+  const [blodData, setBlogData] = useState({
+    title: '',
+    // image: '',
+    discription:''
+  });
+  const handleChange =(e)=>{
+    const {name, value} = e.target;
+    setBlogData({...blodData, [name]: value});
+  };
+  const handleSubmit = async()=>{
+    try{
+       const response = await axios.post("http://localhost:4000/api/blogs/writeblog", blodData);
+       
+       setBlogData({
+        title:"",
+        discription:""
+       });
+       if(response){
+        alert("Blod added succefully");
+       }else{
+        alert()
+       }
+    }catch(e){
+      console.error("Erro for submiting blog", e);
+    }
+  }
     return(<>
      <div className="container-fluid">
      <button className="btn btn-dark mt-2">
@@ -16,7 +41,7 @@ const NewBlog = ()=>{
       <div className="row pt-2" id="p">
         <h1  id="blog">Create new Blog post</h1>
         <div className="col-sm-12 ">
-          <form > 
+          <form onSubmit={handleSubmit}> 
             <div className="form-group">
               <label htmlFor="title">Title</label>
               <input
@@ -26,6 +51,7 @@ const NewBlog = ()=>{
                 name="title"
                 aria-describedby="titleHelp"
                 placeholder="Enter title"
+                onChange={handleChange}
               />
              
             </div>
@@ -46,7 +72,9 @@ const NewBlog = ()=>{
                 id="discription"
                 name="discription"
                 placeholder="Discription"
-                style={{height:"200px"}}/>
+                style={{height:"200px"}}
+                onChange={handleChange}
+                />
             </div>
             <button type="submit" className="btn btn-success mt-2">
               Add Blog

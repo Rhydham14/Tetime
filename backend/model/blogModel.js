@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const blogSchema = new mongoose.Schema({
-    email:{type:String},
+    // email:{type:String},
     title:{type: String, require:true},
-    discrpition:{type:String, require:true}
+    discription:{type:String, require:true}
 
 })
 
