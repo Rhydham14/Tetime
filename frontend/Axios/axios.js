@@ -1,7 +1,36 @@
 import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "http://localhost:4000/api/users/",
-});
-
-export default instance;
+import { config } from "dotenv";
+ 
+const axiosInstance = axios.create(process.env.baseUrl);
+ 
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `bearer ${token}`;
+    }
+ 
+    console.log("Request Interceptor:", config);
+    return config;
+  },
+  (error) => {
+    console.error("Request Interceptor Error:", error);
+    return Promise.reject(error);
+  }
+);
+ 
+// Response interceptor
+axiosInstance.interceptors.response.use(
+  (response) => {
+    // Do something with response data
+    console.log("Response Interceptor:", response);
+    return response;
+  },
+  (error) => {
+    // Do something with response error
+    console.error("Response Interceptor Error:", error);
+    return Promise.reject(error);
+  }
+);
+ 
+export default axiosInstance;

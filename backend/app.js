@@ -23,6 +23,8 @@ app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3000/'] }))
 app.use('/api/users', userRoutes);
 app.use('/api/blogs',blogRoutes);
 
+app.use('/api/blogs',blogRoutes);
+
 app.listen(PORT, () => {
     console.log("Server connected:", PORT);
 });

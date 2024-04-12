@@ -1,4 +1,7 @@
 const userService = require('../service/userService');
+const jwt = require('jsonwebtoken');
+const jwtSecretKey = 'your_secret_key_here';
+
 const UserController = {
     register: async(req, res) => {
       try{
@@ -28,7 +31,9 @@ const UserController = {
           const { message } = userData;
           res.status(401).json({ success: false, message });
         }
-
+        //Creating jwt token here and passing tokon to client  side 
+        const token = jwt.sign(userData,jwtSecretKey,{ expiresIn: '1m' });
+        res.json({token});
       }catch(e){
         console.log("error",e);
         res.status(500).json({ error: 'Internal server error' });

@@ -10,6 +10,8 @@ router.post('/register', UserController.register);
 
 router.post('/writeblog', blogController.writeblog);
 
+router.get('/readblog', blogController.readblog);
+
 
 module.exports = router;
 

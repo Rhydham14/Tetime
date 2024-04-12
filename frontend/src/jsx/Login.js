@@ -21,6 +21,9 @@ const Login = () => {
       // const response = await axios.get("http://localhost:3001/users");
       const response = await axios.post("http://localhost:4000/api/users/login", credentials); // Replace with your API endpoint
       const { success, message, fname } = response.data;
+      const token = response.data.token;
+      sessionStorage.setItem('token', token);
+
       if(success){
 
         sessionStorage.setItem('fname', fname);

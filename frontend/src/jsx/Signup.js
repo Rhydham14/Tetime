@@ -127,7 +127,8 @@ const Signup = () => {
                   placeholder="Enter First Name"
                   value={data.fname}
                   onChange={handleChange}
-                />
+                  required
+/>
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
@@ -139,7 +140,8 @@ const Signup = () => {
                   name="lname"
                   value={data.lname}
                   onChange={handleChange}
-                />
+                  required
+/>
               </div>
               <div class="form-group">
                 <label for="email">Email address</label>
@@ -152,7 +154,8 @@ const Signup = () => {
                   name="email"
                   value={data.email}
                   onChange={handleChange}
-                />
+                  required
+/>
                 <small id="emailHelp" class="form-text text-dark">
                   We'll never share your email with anyone else.
                 </small>
@@ -167,7 +170,8 @@ const Signup = () => {
                   name="password"
                   value={data.password}
                   onChange={handleChange}
-                />
+                  required
+/>
               </div>
               <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
@@ -179,7 +183,8 @@ const Signup = () => {
                   name="cpswd"
                   value={data.cpswd}
                   onChange={handleChange}
-                />
+                  required
+/>
               </div>
               {!valid && (
                 <span style={{ color: "red" }}>
@@ -196,7 +201,8 @@ const Signup = () => {
                   name="contact"
                   value={data.contact}
                   onChange={handleChange}
-                />
+                              required
+/>
               </div>
               <div className="form-group">
                 <label htmlFor="dateOfBirth">Date of Birth</label>
@@ -208,7 +214,8 @@ const Signup = () => {
                   name="dob"
                   value={data.dob}
                   onChange={handleChange}
-                />
+                              required
+/>
               </div>
 
               <div>
