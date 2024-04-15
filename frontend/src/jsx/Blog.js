@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Sidebar from "../jsx/Sidebar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
