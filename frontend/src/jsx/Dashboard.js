@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 import tetime from "../images/Rich Startup.png";
 import Footer from "../jsx/Footer";
 // import comp from "../images/computer.jpg";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../Axios/axios";
 const Dashboard = () => {
   // const location = useLocation();
   // const searchParams = new URLSearchParams(location.search);
@@ -16,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/blogs/readblog");
+        const response = await axiosInstance.get("/api/blogs/readblog");
         console.log("Response:", response.data); // Log response data to console
         setBlogData(response.data); // Update blogData state with fetched data
       } catch (error) {
@@ -60,17 +61,38 @@ const Dashboard = () => {
         {blogData && blogData.length > 0 ? (
         blogData.map(blog => (
           <div key={blog.id}>
-            <table style={{border:"solid"}}>
-              <tr>
-                <td style={{border:"solid"}}>
-                  <h6>title: {blog.title}</h6>
-                </td>
-                <td style={{border:"solid"}}>
-                   <h6> dis: {blog.discription}</h6>
-                </td>
-              </tr>
-            </table>
-          </div>
+          <table style={{ border: "solid" }}>
+            <tr>
+              <td style={{ border: "solid", maxWidth: "200px", overflow: "hidden" }}>
+                <h6
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    margin: "0",
+                    padding: "5px",
+                  }}
+                >
+                  title: {blog.title}
+                </h6>
+              </td>
+              <td style={{ border: "solid", maxWidth: "30vw", overflow: "hidden" }}>
+                <h6
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    margin: "0",
+                    padding: "5px",
+                  }}
+                >
+                  dis: {blog.discription}
+                </h6>
+              </td>
+            </tr>
+          </table>
+        </div>
+        
         ))
       ) : (
         <p>No blogs available</p>

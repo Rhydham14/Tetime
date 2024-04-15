@@ -11,17 +11,12 @@ const img = {
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  // const searchParams = new URLSearchParams(location.search);
-  // const fname = searchParams.get('fname');
   const storedFname = sessionStorage.getItem("fname");
-  // console.log("----------------", storedFname);  
 
   const handleLogout = () => {
     const name = sessionStorage.removeItem("fname");
-    // console.log("@@@@@", name);
     localStorage.getItem("name", name);
   };
-  // console.log("*****************", storedFname);
 
   return (
     <div className="col-sm-2" id="shadow">

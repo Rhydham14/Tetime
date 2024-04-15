@@ -1,22 +1,27 @@
 const jwt = require('jsonwebtoken');
+const jwtSecretKey = 'your_secret_key_here'
 
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-console.log("************",token);
-  if (!token) {
-    console.log("No token ");
-    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+const auth = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Authorization token not provided' });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Forbidden: Invalid token' });
+  const token = authHeader.split(' ')[1]; // Extract the token part from the Authorization header
+
+  try {
+    const decoded = jwt.verify(token, jwtSecretKey);
+
+    // Attach decoded user information to the request object for further use in subsequent middleware or routes
+    req.user = decoded.user;
+    next(); // Move to the next middleware or route handler
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Token expired' });
     }
-    req.userData = decoded;
-    // req.readblog = decoded;
-    next();
-  });
+    return res.status(401).json({ message: 'Invalid token' });
+  }
 };
 
-module.exports = { authenticateToken };
+module.exports = { auth };

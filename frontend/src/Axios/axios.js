@@ -1,7 +1,6 @@
 import axios from "axios";
-import { config } from "dotenv";
  
-const axiosInstance = axios.create(process.env.baseUrl);
+const axiosInstance = axios.create({baseURL: "http://localhost:4000"});
  
 axiosInstance.interceptors.request.use(
   (config) => {

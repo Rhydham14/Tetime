@@ -25,8 +25,8 @@ const userService = {
     try{
       const user = await User.findOne(userData);
       if(user){
-        console.log("fjsdjklghjag",user);
-        return { success: true, message: 'Login successful', fname: user.fname };
+        
+        return { success: true, message: 'Login successful', fname: user.fname, email: user.email };
       } 
       else{
         return { success: true, message: 'Login fail'};
@@ -37,4 +37,4 @@ const userService = {
   }
 };
 
-module.exports = userService;
+module.exports = userService; 
