@@ -43,6 +43,7 @@ const UserController = {
             message: userData.message,
             fname: userData.fname,
             token,
+            user_id:userData.user_id
           });
       } else {
         // Login failed

@@ -20,14 +20,17 @@ const Login = () => {
       // Fetch user data from API
       // const response = await axios.get("http://localhost:3001/users");
       const response = await axios.post("http://localhost:4000/api/users/login", credentials); // Replace with your API endpoint
-      const { success, message, fname, email } = response.data;
+      const { success, message, fname, user_id } = response.data;
       const token = response.data.token;
+      const userid = response.data.user_id;
       sessionStorage.setItem('token', token);
+      sessionStorage.setItem('user_id', userid);
+
 
       if(success){
 
         sessionStorage.setItem('fname', fname);
-        sessionStorage.setItem('email', email);
+        // sessionStorage.setItem('email', email);
         navigate("/dashboard");
       }else{
         return("Login fail",message)

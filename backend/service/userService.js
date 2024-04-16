@@ -26,7 +26,7 @@ const userService = {
       const user = await User.findOne(userData);
       if(user){
         
-        return { success: true, message: 'Login successful', fname: user.fname };
+        return { success: true, message: 'Login successful', fname: user.fname, user_id: user._id };
       } 
       else{
         return { success: true, message: 'Login fail'};

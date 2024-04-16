@@ -6,10 +6,8 @@ const blogSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'userModel' // Specify the name of the referenced model (User)
-  }
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Reference to the User model
+
 });
 
 const blogModel = mongoose.model("Blog", blogSchema);

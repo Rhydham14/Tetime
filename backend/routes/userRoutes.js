@@ -13,5 +13,6 @@ router.post('/writeblog', blogController.writeblog);
 
 router.get('/readblog', blogController.readblog);
 
+router.get('/userblog', blogController.userblog);
 
 module.exports = router;    

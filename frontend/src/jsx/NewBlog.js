@@ -14,24 +14,29 @@ const NewBlog = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBlogData({ ...blodData, [name]: value });
-  };
+  };  
+  
   const handleSubmit = async () => {
     try {
+    const user_id = sessionStorage.getItem('user_id');
+      const allData = {...blodData, user_id};
       const response = await axios.post(
         "http://localhost:4000/api/blogs/writeblog",
-        blodData
-      );
+        allData
+        );
+        // console.log("responseeee",response.data);
+      if(response.data){
+        alert("Blod added succefully");
+      }else{
+        alert("Somthing went wrong!!");
 
+      }
       setBlogData({
         title: "",
         discription: "",
       });
-      
-      if (response) {
-        alert("Blod added succefully");
-      } else {
-        alert();
-      }
+ 
+
     } catch (e) {
       console.error("Erro for submiting blog", e);
     }

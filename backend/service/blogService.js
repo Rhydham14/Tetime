@@ -9,7 +9,7 @@ const blogService = {
       const writeblog = await Blog.create({
         title: blogData.title,
         discription: blogData.discription,
-        author: user._id
+        user_id: blogData.user_id
       });
       return blogData;
     } catch (e) {
@@ -25,6 +25,14 @@ const blogService = {
       return error;
     }
   },
+  userblog: async (user_id) => {
+    try {
+      const userBlogs = await Blog.find({ user_id }).select("title discription");
+      return userBlogs;
+    } catch (error) {
+      throw error;
+    }
+  }
 };
 
 module.exports = blogService;
