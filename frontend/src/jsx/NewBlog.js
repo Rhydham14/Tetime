@@ -45,7 +45,7 @@ const NewBlog = () => {
     <>
       <div className="container-fluid">
         <button className="btn btn-dark mt-2">
-          <Link to="/Blog" id="lnk">
+          <Link to="/Blog"style={{color:"white", textDecoration:"none"}} id="lnk">
             <ChevronLeftIcon />
             Black
           </Link>

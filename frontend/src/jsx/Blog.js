@@ -5,8 +5,7 @@ import axios from "axios";
 import Footer from "../jsx/Footer";
 
 const columns = [
-  { field: "title", headerName: "Title" },
-  { field: "description", headerName: "Description" },
+  { field: "title", headerName: "Title" }
 ];
 
 const Blog = () => {
@@ -44,7 +43,7 @@ const Blog = () => {
               <tr>
                 {columns.map((column) => (
                   <th key={column.field}>{column.headerName}</th>
-                ))}
+                ))} 
                 <th>Action</th>
               </tr>
             </thead>
@@ -56,7 +55,7 @@ const Blog = () => {
                   ))}
                   <td>
                     <Link to={`/ReadBlog/${blog._id}`} className="btn btn-dark m-2">
-                      Read
+                      Preview
                     </Link>
                     <button className="btn btn-success m-2">Update</button>
                     <button className="btn btn-danger m-2">Remove</button>

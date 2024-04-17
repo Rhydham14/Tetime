@@ -32,6 +32,14 @@ const blogService = {
     } catch (error) {
       throw error;
     }
+  },
+  blogread: async (_id)=>{
+    try{
+      const blogread = await Blog.findById({_id}).select("title discription");
+      return blogread;
+    }catch(error){  
+      throw error;
+    }
   }
 };
 

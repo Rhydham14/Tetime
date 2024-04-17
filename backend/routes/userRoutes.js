@@ -15,4 +15,6 @@ router.get('/readblog', blogController.readblog);
 
 router.get('/userblog', blogController.userblog);
 
+router.get('/blogread', blogController.blogread);
+
 module.exports = router;    

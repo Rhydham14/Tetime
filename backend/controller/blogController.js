@@ -28,6 +28,16 @@ const blogController = {
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch user's blogs", error: error.message });
     }
+  },
+  blogread: async (req, res)=>{
+    try{
+      const {_id} = req.query;
+      console.log("blogID backend", _id);
+      const blogread = await blogService.blogread(_id);
+      res.status(200).json(blogread);
+    }catch(error){
+      res.status(500).json({message:"Blogging error", error:error.message});
+    }
   }
 };
 
