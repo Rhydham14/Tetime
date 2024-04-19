@@ -6,9 +6,11 @@ const blogSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Reference to the User model
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // Reference to the User model
+  filename: { type: String, required: true },
+  path: { type: String, required: true },
 
 });
 
 const blogModel = mongoose.model("Blog", blogSchema);
-module.exports = blogModel;
+module.exports = {blogModel};

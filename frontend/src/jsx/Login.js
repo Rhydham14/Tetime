@@ -19,24 +19,25 @@ const Login = () => {
     try {
       // Fetch user data from API
       // const response = await axios.get("http://localhost:3001/users");
-      const response = await axios.post("http://localhost:4000/api/users/login", credentials); // Replace with your API endpoint
+      const response = await axios.post(
+        "http://localhost:4000/api/users/login",
+        credentials
+      ); // Replace with your API endpoint
       const { success, message, fname, user_id } = response.data;
       const token = response.data.token;
       const userid = response.data.user_id;
-      sessionStorage.setItem('token', token);
-      sessionStorage.setItem('user_id', userid);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("user_id", userid);
 
-
-      if(success){
-
-        sessionStorage.setItem('fname', fname);
+      if (success) {
+        sessionStorage.setItem("fname", fname);
         // sessionStorage.setItem('email', email);
         navigate("/dashboard");
-      }else{
-        return("Login fail",message)
+      } else {
+        return "Login fail", message;
       }
       // Log the entire response and users array to inspect their structur
-          // console.log("sucess");
+      // console.log("sucess");
     } catch (error) {
       console.error("Login failed", error);
       setError("An error occurred while logging in");
@@ -44,14 +45,21 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid"  >
+    <div className="container-fluid">
       <h1 className="text-danger text-center">Tetime</h1>
       <div className="row mx-auto d-flex justify-item-center">
-        <h1 className="login" id="login">Login</h1>
-        <div className="col-sm-12 p-5  mx-auto  d-flex align-items-center" id="text">
+        <h1 className="login" id="login">
+          Login
+        </h1>
+        <div
+          className="col-sm-12 p-5  mx-auto  d-flex align-items-center"
+          id="text"
+        >
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email" style={{color:"black"}}>Email address</label>
+              <label htmlFor="email" style={{ color: "black" }}>
+                Email address
+              </label>
               <input
                 type="email"
                 className="form-control"
@@ -67,7 +75,9 @@ const Login = () => {
               </small>
             </div>
             <div className="form-group">
-              <label htmlFor="password" style={{color:"black"}}>Password</label>
+              <label htmlFor="password" style={{ color: "black" }}>
+                Password
+              </label>
               <input
                 type="password"
                 className="form-control"
@@ -78,22 +88,22 @@ const Login = () => {
                 onChange={handleChange}
               />
             </div>
-            {error && <div style={{color:"red"}}>{error}</div>}
+            {error && <div style={{ color: "red" }}>{error}</div>}
             <button type="submit" className="btn btn-dark mt-2">
               Submit
             </button>
-            <p style={{color:"black"}}>Don't have an account?</p>
+            <p style={{ color: "black" }}>Don't have an account?</p>
             <Link to="/signup" className="nav-link text-dark text-sm">
               Sign up
             </Link>
             <Link to="/dashboard" className="nav-link text-dark text-sm">
-            Dashboard            
+              Dashboard
             </Link>
           </form>
         </div>
       </div>
     </div>
-  );  
+  );
 };
 
 export default Login;
