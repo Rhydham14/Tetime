@@ -1,21 +1,24 @@
 const { readblog } = require("../controller/blogController");
-const {Blog} = require("../model/blogModel");
+const Blog = require("../model/blogModel");
 const usercontroller = require("../controller/userController");
 const userModel = require("../model/userModel");
 
 const blogService = {
-  writeblog: async (blogData) => {
+ writeblog: async (blogData) => {
     try {
       await Blog.create({
         title: blogData.title,
-        discription: blogData.discription,
-        // user_id: blogData.user_id,
+        description: blogData.description,
+        user_id: blogData.user_id,
         filename: blogData.filename,
         path: blogData.path
       });
+
+      console.log(blogData);
       return blogData;
-    } catch (e) {
-      return e; 
+    } catch (error) {
+      console.error('Error creating blog:', error);
+      throw error;
     }
   },
   readblog: async () => {

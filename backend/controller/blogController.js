@@ -4,9 +4,9 @@ const crypto = require('crypto');
 const blogController = {
   writeblog: async (req, res) => {
     try {
-      const { title, discription} = req.body;
+      const { title, discription, user_id} = req.body;
       const { filename, path } = req.file;
-      const writeblog = await blogService.writeblog({ title, discription, filename, path });
+      const writeblog = await blogService.writeblog({ title, discription, filename, path, user_id });
       res.status(201).json({ message: "Blog added", writeblog });
     } catch (e) {
       res.status(500).json({ message: "Something went wrong", error: e.message });
