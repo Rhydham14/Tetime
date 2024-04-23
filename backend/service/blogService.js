@@ -1,38 +1,65 @@
-const { readblog } = require("../controller/blogController");
-const Blog = require("../model/blogModel");
-const usercontroller = require("../controller/userController");
-const userModel = require("../model/userModel");
+// const { readblog } = require("../controller/blogController");
+const Blogg = require("../model/blogModel");
+// const usercontroller = require("../controller/userController");
+// const userModel = require("../model/userModel");
 
 const blogService = {
- writeblog: async (blogData) => {
+  writeblog: async (blogData, file) => {
     try {
-      await Blog.create({
-        title: blogData.title,
-        description: blogData.description,
-        user_id: blogData.user_id,
-        filename: blogData.filename,
-        path: blogData.path
+      const { title, discription, user_id } = blogData;
+
+      // Check if image object and its properties are defined
+
+      // Create a new blog document
+      const newBlog = await Blogg.create({
+        title,
+        discription,
+        user_id,
+        filename: file.originalname,
+        contentType: file.mimetype,
+        file: file.buffer, // Store the file data directly in the 'file' field
       });
 
-      console.log(blogData);
-      return blogData;
+      // console.log("Blog created:", newBlog);
+      return newBlog;
     } catch (error) {
-      console.error('Error creating blog:', error);
+      console.error("Error creating blog:", error);
       throw error;
     }
   },
+
   readblog: async () => {
     try {
-      const readblog = await Blog.find({}, "title discription");
-      // console.log(readblog);
-      return readblog;
+      // Query all blog documents from the database
+      const blogData = await Blogg.find({});
+
+      // Map over each blog document to format and include image data
+      const blogsWithImageData = blogData.map((blog) => {
+        return {
+          _id: blog._id,
+          title: blog.title,
+          discription: blog.discription,
+          user_id: blog.user_id,
+          filename: blog.filename,
+          contentType: blog.contentType,
+          // Convert binary image data to Base64 string
+          imageData: blog.file.toString("base64"),
+          date: blog.date,
+          // __v: blog.__v,
+        };
+      });
+
+      return blogsWithImageData;
     } catch (error) {
-      return error;
+      console.error("Error fetching blog data:", error);
+      throw error;
     }
   },
   userblog: async (user_id) => {
     try {
-      const userBlogs = await Blog.find({ user_id }).select("title discription");
+      const userBlogs = await Blogg.find({ user_id }).select(
+        "title discription"
+      );
       return userBlogs;
     } catch (error) {
       throw error;
@@ -40,38 +67,36 @@ const blogService = {
   },
   blogread: async (_id)=>{
     try{
-      const blogread = await Blog.findById({_id}).select("title discription");
+      const blogread = await Blogg.findById({_id}).select("title discription");
       return blogread;
     }catch(error){  
       throw error;
     }
   },
-  deleteblog: async (_id)=>{
-    try{
-      const deleteblog = await Blog.findByIdAndDelete({_id});
+  deleteblog: async (_id) => {
+    try {
+      const deleteblog = await Blogg.findByIdAndDelete({ _id });
       return deleteblog;
-    }catch(error){
+    } catch (error) {
       throw error;
     }
   },
-  updateblog: async(updateblog)=>{
-    try{
-      console.log("aaaaaaaaa",updateblog);
+  updateblog: async (updateblog) => {
+    try {
+      console.log("aaaaaaaaa", updateblog);
       const _id = updateblog._id;
-      const updatedblog = await Blog.findByIdAndUpdate(
-        {_id},
-      {
-        title:updateblog.title,
-        discription:updateblog.discription
-      }
+      const updatedblog = await Blogg.findByIdAndUpdate(
+        { _id },
+        {
+          title: updateblog.title,
+          discription: updateblog.discription,
+        }
       );
       return updatedblog;
-    }catch(error){
+    } catch (error) {
       return error;
     }
-  
-  }
- 
+  },
 };
 
 module.exports = blogService;

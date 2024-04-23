@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
-
 import axios from "axios";
 import "../css/Login.css";
 
@@ -17,27 +16,21 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Fetch user data from API
-      // const response = await axios.get("http://localhost:3001/users");
       const response = await axios.post(
         "http://localhost:4000/api/users/login",
         credentials
-      ); // Replace with your API endpoint
-      const { success, message, fname, user_id } = response.data;
-      const token = response.data.token;
-      const userid = response.data.user_id;
-      sessionStorage.setItem("token", token);
-      sessionStorage.setItem("user_id", userid);
+      );
+      const { success, message, fname, user_id, token, refreshToken } = response.data;
 
-      if (success) {
+      if (success && fname) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("refreshToken", refreshToken);
+        sessionStorage.setItem("user_id", user_id);
         sessionStorage.setItem("fname", fname);
-        // sessionStorage.setItem('email', email);
         navigate("/dashboard");
       } else {
-        return "Login fail", message;
+        setError(message || "Login incorrect");
       }
-      // Log the entire response and users array to inspect their structur
-      // console.log("sucess");
     } catch (error) {
       console.error("Login failed", error);
       setError("An error occurred while logging in");
@@ -51,11 +44,9 @@ const Login = () => {
         <h1 className="login" id="login">
           Login
         </h1>
-        <div
-          className="col-sm-12 p-5  mx-auto  d-flex align-items-center"
-          id="text"
-        >
+        <div className="col-sm-12 p-5 mx-auto d-flex align-items-center" id="text">
           <form onSubmit={handleSubmit}>
+            {error && <div style={{ color: "red" }}>{error}</div>}
             <div className="form-group">
               <label htmlFor="email" style={{ color: "black" }}>
                 Email address
@@ -88,7 +79,6 @@ const Login = () => {
                 onChange={handleChange}
               />
             </div>
-            {error && <div style={{ color: "red" }}>{error}</div>}
             <button type="submit" className="btn btn-dark mt-2">
               Submit
             </button>

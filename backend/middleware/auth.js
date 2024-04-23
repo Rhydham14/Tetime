@@ -1,27 +1,34 @@
-const jwt = require('jsonwebtoken');
-const jwtSecretKey = 'your_secret_key_here'
+const jwt = require("jsonwebtoken");
+const jwtSecretKey = "rhydhmroll";
 
-const auth = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Authorization token not provided' });
+const auth = async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  console.log("rocke and roll",token);
+  if (!token) {
+    return res
+      .status(401)
+      .json({ success: false, message: "Access token is missing" });
   }
 
-  const token = authHeader.split(' ')[1]; // Extract the token part from the Authorization header
-
   try {
+    console.log("rocke and roll");
+    
     const decoded = jwt.verify(token, jwtSecretKey);
+console.log("decoded",decoded);
+    req.userData = decoded;
 
-    // Attach decoded user information to the request object for further use in subsequent middleware or routes
-    req.user = decoded.user;
-    next(); // Move to the next middleware or route handler
+    next();
   } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ message: 'Token expired' });
+    console.log("erorrrrrrr",error);
+    if (error.name === "TokenExpiredError") {
+      console.log("419 419 419 419 419 419 419");
+      return res.status(419).json({ success: false, message: "Token expired" });
+    } else {
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid access token" });
     }
-    return res.status(401).json({ message: 'Invalid token' });
   }
 };
 
-module.exports = { auth };
+module.exports = auth;

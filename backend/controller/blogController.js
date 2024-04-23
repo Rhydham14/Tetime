@@ -1,27 +1,32 @@
+const { log } = require("console");
 const blogService = require("../service/blogService");
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 const blogController = {
   writeblog: async (req, res) => {
     try {
-      const { title, discription, user_id} = req.body;
-      const { filename, path } = req.file;
-      const writeblog = await blogService.writeblog({ title, discription, filename, path, user_id });
+      const { title, discription, user_id } = req.body;
+      const file = req.file;
+
+      const writeblog = await blogService.writeblog({ title, discription, user_id }, file);
       res.status(201).json({ message: "Blog added", writeblog });
     } catch (e) {
+      console.log("controller error", e);
       res.status(500).json({ message: "Something went wrong", error: e.message });
     }
   },
 
-  readblog: async (req, res) => {
-    try {
-      const readblog = await blogService.readblog();
-      res.status(200).json(readblog);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch blogs", error: error.message });
-    }
-  },
 
+  readblog: async (req, res) => {
+      try {
+        const blogData = await blogService.readblog();
+        // console.log("Blog data:", blogData);
+        res.status(200).json(blogData);
+      } catch (error) {
+        console.error("Error fetching blog data:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
+    },
   userblog: async (req, res) => {
     try {
       const { user_id } = req.query;

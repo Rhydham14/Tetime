@@ -4,19 +4,23 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Link } from "react-router-dom";
 
 const NewBlog = () => {
+  // Retrieve user_id from sessionStorage
+  const user_id = sessionStorage.getItem("user_id");
+
   const [blogData, setBlogData] = useState({
     title: "",
-    file: null, // Store file object in state
+    file: null,
     discription: "",
+    user_id: user_id, // Initialize user_id with retrieved value
   });
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    const file = files && files[0]; // Get the first selected file
+    const file = files && files[0];
 
     setBlogData((prevData) => ({
       ...prevData,
-      [name]: name === "file" ? file : value, // Update image state with file object
+      [name]: name === "file" ? file : value,
     }));
   };
 
@@ -28,6 +32,8 @@ const NewBlog = () => {
       formData.append("title", blogData.title);
       formData.append("discription", blogData.discription);
       formData.append("file", blogData.file);
+      console.log("fileeee", blogData.file);
+      formData.append("user_id", blogData.user_id); // Include user_id in the form data
 
       const response = await axios.post("http://localhost:4000/api/blogs/writeblog", formData, {
         headers: {
@@ -41,7 +47,8 @@ const NewBlog = () => {
       setBlogData({
         title: "",
         file: null,
-        discription: "",
+        description: "",
+        user_id: user_id, // Reset user_id after submission
       });
     } catch (error) {
       console.error("Error adding blog:", error);
@@ -92,7 +99,7 @@ const NewBlog = () => {
                 className="form-control"
                 id="discription"
                 name="discription"
-                placeholder="Description"
+                placeholder="Discription"
                 style={{ height: "200px" }}
                 value={blogData.discription}
                 onChange={handleChange}
