@@ -52,6 +52,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+          <div className="container-fluid">
           <div className="row bg-light">
             <h3 className="text-center text-danger">Explore Blogs</h3>
             {blogData && blogData.length > 0 ? (
@@ -70,6 +71,7 @@ const Dashboard = () => {
             ) : (
               <p className="text-center">No blogs available</p>
             )}
+          </div>
           </div>
         </div>
         )}
