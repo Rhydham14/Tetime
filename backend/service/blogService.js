@@ -65,11 +65,30 @@ const blogService = {
       throw error;
     }
   },
-  blogread: async (_id)=>{
-    try{
-      const blogread = await Blogg.findById({_id}).select("title discription");
-      return blogread;
-    }catch(error){  
+  blogread: async (_id) => {
+    try {
+      // Find the blog document by its _id
+      const blog = await Blogg.findById(_id);
+
+      if (!blog) {
+        throw new Error("Blog not found");
+      }
+
+      // Convert binary image data to Base64 string
+      const imageData = blog.file.toString("base64");
+
+      // Return the transformed blog data object
+      return {
+        _id: blog._id,
+        title: blog.title,
+        discription: blog.discription, // assuming the field name is 'description'
+        user_id: blog.user_id,
+        filename: blog.filename,
+        contentType: blog.contentType,
+        imageData: imageData,
+        date: blog.date,
+      };
+    } catch (error) {
       throw error;
     }
   },

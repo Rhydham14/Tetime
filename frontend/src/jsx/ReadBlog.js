@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 // import Sidebar from "./Sidebar";
 import { Link, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import blogimage from '../images/blogimg.png';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import axios from "axios";
-import Blog from '../jsx/Blog';
-const blgimg = {
-    height: "150px",
-    // boxShadow: "0 0 5px rgba(0, 0, 0, 0.3)",
-  };
+// import Blog from '../jsx/Blog';
+
 
 const ReadBlog = () => {
     const {_id} = useParams();
@@ -19,8 +15,8 @@ const ReadBlog = () => {
         const getData = async ()=>{
             try{
                 const response = await axios.get(`http://localhost:4000/api/blogs/blogread/?_id=${_id}`);
-                const {title, discription} = response.data;
-                setBlogData({title, discription});
+                // const {title, discription} = ;
+                setBlogData(response.data);
             }catch(e){
                 return e;
             }
@@ -44,10 +40,10 @@ const ReadBlog = () => {
         <hr></hr>
         {/* Image and discription */}
         <div className="row">
-            <div className="col-sm-4">
-                <img src={blogimage}  style={blgimg}/>
+            <div className="col-sm-6">
+            <img src={`data:${blogData.contentType};base64,${blogData.imageData}`} alt={blogData.title} style={{ height: "200px", objectFit: "cover" }} />
             </div>
-            <div className="col-sm-8">
+            <div className="col-sm-6">
                 <h5>Discription:</h5><br/>
                 <p>{blogData.discription}</p>
             </div>
