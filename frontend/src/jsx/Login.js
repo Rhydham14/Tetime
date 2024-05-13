@@ -116,7 +116,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/api/users/login", credentials);
+      const response = await axios.post("https://tetime-omvgsfc45-rhydham14s-projects.vercel.app/api/users/login", credentials);
       const { success, message, fname, user_id, token, refreshToken } = response.data;
 
       if (success && fname) {
