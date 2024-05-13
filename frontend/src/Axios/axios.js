@@ -1,5 +1,5 @@
 import axios from "axios";
-const axiosInstance = axios.create({baseURL: "http://localhost:4000"}); 
+const axiosInstance = axios.create({baseURL: "https://tetime-2.onrender.com"}); 
  
 axiosInstance.interceptors.request.use(
   async (config) => {
