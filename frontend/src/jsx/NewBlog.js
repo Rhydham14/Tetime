@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from '../Axios/axios';
+
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { Link } from "react-router-dom";
 
@@ -35,7 +37,7 @@ const NewBlog = () => {
       console.log("fileeee", blogData.file);
       formData.append("user_id", blogData.user_id); // Include user_id in the form data
 
-      const response = await axios.post("http://localhost:4000/api/blogs/writeblog", formData, {
+      const response = await axiosInstance.post("/api/blogs/writeblog", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

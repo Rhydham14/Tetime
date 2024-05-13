@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Signup.css";
-import axios from "axios"
+// import axios from "axios"
 import { useNavigate } from "react-router-dom";
-
+import axiosInstance from '../Axios/axios';
 
 const countries = [
   { id: 1, name: "India" },
@@ -70,7 +70,7 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     try {
-      const response = await axios.post("http://localhost:4000/api/users/register", data); // Replace with your API endpoint
+      const response = await axiosInstance.post("/api/users/register", data); // Replace with your API endpoint
       console.log(response.data); // Handle successful response (optional)
       setData({
         // Reset form data after successful submission

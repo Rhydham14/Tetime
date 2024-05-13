@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../jsx/Sidebar";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from '../Axios/axios';
+
 import Footer from "../jsx/Footer";
 import { Button, Modal, Form } from "react-bootstrap";
 
@@ -20,8 +22,8 @@ const Blog = () => {
     const fetchUserBlogs = async () => {
       try {
         const user_id = sessionStorage.getItem("user_id");
-        const response = await axios.get(
-          `http://localhost:4000/api/blogs/userblog?user_id=${user_id}`
+        const response = await axiosInstance.get(
+          `/api/blogs/userblog?user_id=${user_id}`
         );
 
         if (response.data) {
@@ -37,7 +39,7 @@ const Blog = () => {
 
   const handleDelete = async (_id) => {
     try {
-      await axios.delete(`http://localhost:4000/api/blogs/deleteblog?_id=${_id}`);
+      await axiosInstance.delete(`/api/blogs/deleteblog?_id=${_id}`);
       setUserBlogs(userBlogs.filter((blog) => blog._id !== _id));
       console.log("Blog deleted successfully");
     } catch (error) {
@@ -76,7 +78,7 @@ const Blog = () => {
   const handleSubmit = async () => {
     try {
       const { _id, title, discription } = formData;
-      await axios.patch(`http://localhost:4000/api/blogs/updateblog?_id=${_id}`, {
+      await axiosInstance.patch(`/api/blogs/updateblog?_id=${_id}`, {
         title,
         discription
       });

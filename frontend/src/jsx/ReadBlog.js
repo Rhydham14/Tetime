@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from '../Axios/axios';
+
 // import Blog from '../jsx/Blog';
 
 
@@ -14,7 +16,7 @@ const ReadBlog = () => {
     useEffect(()=>{
         const getData = async ()=>{
             try{
-                const response = await axios.get(`http://localhost:4000/api/blogs/blogread/?_id=${_id}`);
+                const response = await axiosInstance.get(`/api/blogs/blogread/?_id=${_id}`);
                 // const {title, discription} = ;
                 setBlogData(response.data);
             }catch(e){

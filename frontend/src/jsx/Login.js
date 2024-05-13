@@ -101,7 +101,9 @@
 //--------------------------
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from '../Axios/axios';
+
 import "../css/Login.css";
 
 const Login = () => {
@@ -116,7 +118,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://tetime-omvgsfc45-rhydham14s-projects.vercel.app/api/users/login", credentials);
+      const response = await axiosInstance.post("/api/users/login", credentials);
       const { success, message, fname, user_id, token, refreshToken } = response.data;
 
       if (success && fname) {

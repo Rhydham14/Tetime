@@ -19,7 +19,7 @@ app.use(express.json());
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: ["https://tetime-rhydham14s-projects.vercel.app/", "https://tetime-rhydham14s-projects.vercel.app"] }));
+app.use(cors({ origin: ["https://tetime-rhydham14s-projects.vercel.app/", "https://tetime-rhydham14s-projects.vercel.app","http://localhost:3000/","http://localhost:3000"] }));
 app.use("/api/users", userRoutes);
 app.use("/api/blogs", blogRoutes);
 
