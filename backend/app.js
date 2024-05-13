@@ -20,6 +20,8 @@ const blogRoutes = require("../backend/routes/userRoutes.js");
 const allowedOrigins = [
   "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
   "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
+  "https://tetime.vercel.app/",
+  "https://tetime.vercel.app",
   "http://localhost:3000",
   "http://localhost:3000/"
 ];
