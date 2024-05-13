@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../images/free-avatar-380-456332.png";
 import "../css/Sidebar.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const img = {
   height: "150px",
@@ -10,7 +10,7 @@ const img = {
 };
 
 const Sidebar = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const storedFname = sessionStorage.getItem("fname");
 
   const handleLogout = () => {
