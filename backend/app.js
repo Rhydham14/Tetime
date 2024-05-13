@@ -15,11 +15,17 @@ const blogRoutes = require("../backend/routes/userRoutes.js");
 
 // app.set('view engine', '.hbs');
 // app.set("views", path.join(__dirname, "views"));
+
+
+const allowedOrigins = [
+  "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
+  "http://localhost:3000"
+];
 app.use(express.json());
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: ["https://tetime-q22048yek-rhydham14s-projects.vercel.app/", "https://tetime-q22048yek-rhydham14s-projects.vercel.app","http://localhost:3000/","http://localhost:3000"] }));
+app.use(cors({ origin: allowedOrigins }));
 app.use("/api/users", userRoutes);
 app.use("/api/blogs", blogRoutes);
 
