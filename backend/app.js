@@ -1,7 +1,7 @@
 const express = require("express");
 // const bodyParser = require('body-parser');
 const mongodb = require("../backend/connection/database");
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 const userRoutes = require("../backend/routes/userRoutes.js");
 const UserController = require("../backend/controller/userController.js");
 // const path = require("path");
