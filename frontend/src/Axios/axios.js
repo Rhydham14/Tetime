@@ -49,7 +49,7 @@ axiosInstance.interceptors.response.use(
         try {
           console.log("Refreshing token...");
           const refreshResponse = await axios.get(
-            "https://tetime-2.onrender.com/refresh/refreshtoken",
+            "https://tetime.onrender.com/refresh/refreshtoken",
             {
               headers: { "refresh-token": refreshToken }
             }
