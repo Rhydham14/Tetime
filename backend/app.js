@@ -37,6 +37,9 @@ app.use(cors({
 
 app.use("/api/users", userRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/",(req,res)=>{
+  res.send("temp api");
+})
 
 // Handle CORS preflight OPTIONS requests
 // app.options("*", cors());
