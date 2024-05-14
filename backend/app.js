@@ -17,7 +17,10 @@ app.use(express.json());
 app.use(cors({origin:[
   "https://tetime.vercel.app/","https://tetime.vercel.app",
   "https://tetime-2.vercel.app/","https://tetime-2.vercel.app"
-]}));
+  
+
+],methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+}));
 // app.use(cors({
 //   origin: [
 //     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
@@ -34,7 +37,6 @@ app.use(cors({origin:[
 //     "http://localhost:3000",
 //     "http://localhost:3000/"
 //   ]
-//   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 //   // allowedHeaders: "Content-Type,Authorization"
 // }));
 
