@@ -1,24 +1,17 @@
 import axios from "axios";
+
 const axiosInstance = axios.create({
   baseURL: "https://tetime.onrender.com/"
-  
 });
 
-// Request interceptor to attach authorization headers
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    if (refreshToken) {
-      config.headers["refresh-token"] = refreshToken;
-    }
-
-    console.log("Request Interceptor:", config);
     return config;
   },
   (error) => {
@@ -27,7 +20,6 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle token refresh and other response errors
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log("Response Interceptor:", response);
@@ -67,31 +59,23 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         } catch (refreshError) {
           console.error("Error refreshing access token:", refreshError);
-
-          if (
-            refreshError.response &&
-            refreshError.response.status === 401 &&
-            refreshError.response.data.message === "Refresh token has expired"
-          ) {
-            // Handle token expiration (e.g., log out the user)
+          // Handle refresh error
+          if (refreshError.response && refreshError.response.status === 401) {
             console.log("Refresh token has expired");
-            // Perform logout or other actions as needed
+            // Perform logout or other actions as needed (e.g., redirect to login)
           }
-
-          return Promise.reject(error);
+          return Promise.reject(refreshError);
         }
       } else {
         console.error("No refresh token available");
       }
     }
 
-    // For other error cases, reject the promise with error message
     return Promise.reject(error);
   }
 );
 
 export default axiosInstance;
-
 
 
 // import axios from "axios";
