@@ -1,11 +1,15 @@
 import axios from "axios";
-const axiosInstance = axios.create({baseURL: "https://tetime-2.onrender.com"}); 
-// const axiosInstance = axios.create({baseURL: "http://localhost:8080"}); 
- 
+
+const axiosInstance = axios.create({
+  baseURL: "https://tetime-2.onrender.com"
+  // Change the baseURL as needed for your API endpoint
+  // Example: baseURL: "http://localhost:8080"
+});
+
+// Request interceptor to attach authorization headers
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("token");
-    console.log("ttttt",token);
     const refreshToken = localStorage.getItem("refreshToken");
 
     if (token) {
@@ -25,16 +29,15 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// Response interceptor to handle token refresh and other response errors
 axiosInstance.interceptors.response.use(
-  async (response) => {
+  (response) => {
     console.log("Response Interceptor:", response);
-    console.log("Response Headers:", response.headers);
+    const { data } = response;
 
-    if (response.data.token) {
-      const newtoken = response.data.token;
-
+    if (data.token) {
       // Update the local storage with the new access token
-      localStorage.setItem("token", newtoken);
+      localStorage.setItem("token", data.token);
     }
 
     return response;
@@ -42,43 +45,36 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     console.error("Response Interceptor Error:", error);
 
-    if (error.response && error.response.status === 419) {
-      // Handle 419 error by refreshing the token
-      try {
-        const refreshToken = localStorage.getItem("refreshToken");
-        if (!refreshToken) {
-          throw new Error("No refresh token available");
+    if (error.response && error.response.status === 401) {
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (refreshToken) {
+        try {
+          console.log("Refreshing token...");
+          const refreshResponse = await axios.get(
+            "http://localhost:4000/api/users/refreshToken",
+            {
+              headers: {
+                "refresh-token": refreshToken
+              }
+            }
+          );
+
+          const newToken = refreshResponse.data.token;
+          console.log("New token:", newToken);
+
+          // Update the local storage with the new access token
+          localStorage.setItem("token", newToken);
+
+          // Retry the original request with the new access token
+          const originalRequest = error.config;
+          originalRequest.headers.Authorization = `Bearer ${newToken}`;
+          return axiosInstance(originalRequest);
+        } catch (refreshError) {
+          console.error("Error refreshing access token:", refreshError);
         }
-
-        console.log("Inside token expiration handler, refreshing token...");
-        const refreshResponse = await axios.get(
-          `/api/users/refreshToken`,
-          {
-            headers: {
-              "refresh-token": refreshToken,
-            },
-          }
-        );
-        console.log("-----------------resrefresh", refreshResponse);
-
-        const newtoken = refreshResponse.data.token;
-        console.log("hellloooo token", newtoken);
-        localStorage.setItem("token", newtoken);
-
-        // Retry the original request with the new access token
-        const originalRequest = error.config;
-        originalRequest.headers.Authorization = `Bearer ${newtoken}`;
-        return axiosInstance(originalRequest);
-      } catch (refreshError) {
-        console.error("Error refreshing access token:", refreshError);
-
-        // If the refresh token has expired, dispatch logout action
-        if (
-          refreshError.response.status === 401 &&
-          refreshError.response.data.message === "Refresh token has expired"
-        )
-        
-        return Promise.reject(error);
+      } else {
+        console.error("No refresh token available");
       }
     }
 
@@ -86,7 +82,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-
-
- 
 export default axiosInstance;
