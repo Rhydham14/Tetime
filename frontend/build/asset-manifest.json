@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3cf92689.css",
+    "main.js": "/static/js/main.13fd86bc.js",
+    "static/media/free-avatar-380-456332.png": "/static/media/free-avatar-380-456332.dd8245d4e22290ea8263.png",
+    "static/media/Rich Startup.png": "/static/media/Rich Startup.daab1eeb5be1aaecb521.png",
+    "index.html": "/index.html",
+    "main.3cf92689.css.map": "/static/css/main.3cf92689.css.map",
+    "main.13fd86bc.js.map": "/static/js/main.13fd86bc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3cf92689.css",
+    "static/js/main.13fd86bc.js"
+  ]
+}
