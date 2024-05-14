@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
+<<<<<<< HEAD
   baseURL: "https://tetime-2.onrender.com/"
+=======
+  baseURL: "https://tetime-2.onrender.com",
+>>>>>>> f247692a6f08e1d30aed05ac5c1467e561c16f97
   // Change the baseURL as needed for your API endpoint
   // Example: baseURL: "http://localhost:8080"
 });
