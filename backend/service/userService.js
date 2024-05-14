@@ -23,6 +23,7 @@ const userService = {
   login: async (userData) =>{
     try{
       console.log("usd",userData)
+      console.log("usd",userData.email)
       const user = await User.findOne({email:userData.email});
       console.log("user",user);
       if(user){
