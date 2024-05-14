@@ -4,6 +4,7 @@ const axiosInstance = axios.create({
   baseURL: "https://tetime.onrender.com/"
 });
 
+// Request interceptor to attach authorization headers
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("token");
@@ -20,6 +21,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+// Response interceptor to handle token refresh and other response errors
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log("Response Interceptor:", response);
@@ -65,7 +67,7 @@ axiosInstance.interceptors.response.use(
             // Handle token expiration (e.g., perform logout)
           }
 
-          return Promise.reject(error);
+          return Promise.reject(refreshError);
         }
       } else {
         console.error("No refresh token available");
