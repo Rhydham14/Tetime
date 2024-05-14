@@ -64,14 +64,14 @@ const UserController = {
   refreshToken: async (req, res) => {
     const refreshToken = req.headers["refresh-token"];
 
-    console.log("inside refreshToken", refreshToken);
     try {
-      const decoded = jwt.verify(refreshToken,jwtSecretKey);
-      console.log();
+      const decoded = jwt.verify(refreshToken, jwtSecretKey);
+
+      // Generate a new access token
       const newAccessToken = jwt.sign({ email: decoded.email }, jwtSecretKey, {
-        expiresIn: "15s",
+        expiresIn: "15s", // Adjust the expiry time as needed
       });
-      console.log("new token", newAccessToken);
+
       // Send the new access token in the response
       return res.status(200).json({
         message: "Access token refreshed successfully",
