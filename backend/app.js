@@ -10,18 +10,21 @@ require("dotenv").config();
 // const allowedOrigins = [
 //   "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
 //   "https://tetime.vercel.app",
-//   "http://localhost:3000"
+//   "http://localhost:3000"  
 // ];
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  next(); // Call next middleware
+});
 
 app.use(express.json());
 app.use(cors({
   origin: [
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
-    "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
     "https://tetime.vercel.app",
-    "https://tetime.vercel.app/",
-    "http://localhost:3000",
-    "http://localhost:3000/"
+    "http://localhost:3000"
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: "Content-Type,Authorization"
