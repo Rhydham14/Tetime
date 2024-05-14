@@ -26,6 +26,8 @@ app.use(cors({
     "tetime-git-blogging-rhydham14s-projects.vercel.app/",
     "https://tetime.vercel.app",
     "https://tetime.vercel.app/",
+    "https://tetime-git-blogging-rhydham14s-projects.vercel.app",
+    "https://tetime-git-blogging-rhydham14s-projects.vercel.app/",
     "http://localhost:3000",
     "http://localhost:3000/"
   ],
@@ -40,5 +42,5 @@ app.use("/api/blogs", blogRoutes);
 // app.options("*", cors());
 
 app.listen(PORT, () => {
-  console.log(`Server connected: http://localhost:${PORT}`);
+  console.log(`Server connected:${PORT}`);
 });
