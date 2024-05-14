@@ -23,7 +23,7 @@ const userService = {
   login: async (userData) =>{
     try{
       console.log("usd",userData)
-      const user = await User.findOne(userData);
+      const user = await User.findOne({userData});
       console.log("user",user);
       if(user){
         
