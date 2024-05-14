@@ -30,7 +30,7 @@ const userService = {
         return { success: true, message: 'Login successful', fname: user.fname, user_id: user._id };
       } 
       else{
-        return { success: true, message: 'Login fail'};
+        return { success: false, message: 'Login fail'};
       }
     }catch(e){
       return e ;
