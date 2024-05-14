@@ -16,6 +16,8 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors({
   origin: [
+
+    "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/",
