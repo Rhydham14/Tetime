@@ -16,7 +16,6 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors({
   origin: [
-
     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
@@ -30,9 +29,9 @@ app.use(cors({
     "https://tetime-git-blogging-rhydham14s-projects.vercel.app/",
     "http://localhost:3000",
     "http://localhost:3000/"
-  ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization"
+  ]
+  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  // allowedHeaders: "Content-Type,Authorization"
 }));
 
 app.use("/api/users", userRoutes);
