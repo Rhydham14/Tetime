@@ -18,6 +18,10 @@ app.use(cors({
   origin: [
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
     "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
+    "tetime-nto5ashu6-rhydham14s-projects.vercel.app/",
+    "tetime-nto5ashu6-rhydham14s-projects.vercel.app",
+    "tetime-git-blogging-rhydham14s-projects.vercel.app",
+    "tetime-git-blogging-rhydham14s-projects.vercel.app/",
     "https://tetime.vercel.app",
     "https://tetime.vercel.app/",
     "http://localhost:3000",
