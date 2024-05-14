@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://tetime-2.onrender.com/"
+  baseURL: "https://tetime.onrender.com/"
 });
 
 // Request interceptor to attach authorization headers
