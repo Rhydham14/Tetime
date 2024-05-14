@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("../backend/routes/userRoutes.js");
-const blogRoutes = require("../backend/routes/blogRoutes.js");
+const blogRoutes = require("../backend/routes/userRoutes.js");
 const PORT = process.env.PORT || 8080;
 
 const app = express();
