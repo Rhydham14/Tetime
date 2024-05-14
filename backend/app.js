@@ -14,7 +14,10 @@ require("dotenv").config();
 // ];
 
 app.use(express.json());
-app.use(cors({origin:["https://tetime.vercel.app/","https://tetime.vercel.app"]}));
+app.use(cors({origin:[
+  "https://tetime.vercel.app/","https://tetime.vercel.app",
+  "https://tetime-2.vercel.app/","https://tetime-2.vercel.app"
+]}));
 // app.use(cors({
 //   origin: [
 //     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
