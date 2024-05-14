@@ -14,25 +14,26 @@ require("dotenv").config();
 // ];
 
 app.use(express.json());
-app.use(cors({
-  origin: [
-    "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
-    "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
-    "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
-    "tetime-nto5ashu6-rhydham14s-projects.vercel.app/",
-    "tetime-nto5ashu6-rhydham14s-projects.vercel.app",
-    "tetime-git-blogging-rhydham14s-projects.vercel.app",
-    "tetime-git-blogging-rhydham14s-projects.vercel.app/",
-    "https://tetime.vercel.app",
-    "https://tetime.vercel.app/",
-    "https://tetime-git-blogging-rhydham14s-projects.vercel.app",
-    "https://tetime-git-blogging-rhydham14s-projects.vercel.app/",
-    "http://localhost:3000",
-    "http://localhost:3000/"
-  ]
-  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  // allowedHeaders: "Content-Type,Authorization"
-}));
+app.use(cors({origin:["https://tetime.vercel.app/","https://tetime.vercel.app"]}));
+// app.use(cors({
+//   origin: [
+//     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/", 
+//     "https://tetime-q22048yek-rhydham14s-projects.vercel.app",
+//     "https://tetime-q22048yek-rhydham14s-projects.vercel.app/",
+//     "tetime-nto5ashu6-rhydham14s-projects.vercel.app/",
+//     "tetime-nto5ashu6-rhydham14s-projects.vercel.app",
+//     "tetime-git-blogging-rhydham14s-projects.vercel.app",
+//     "tetime-git-blogging-rhydham14s-projects.vercel.app/",
+//     "https://tetime.vercel.app",
+//     "https://tetime.vercel.app/",
+//     "https://tetime-git-blogging-rhydham14s-projects.vercel.app",
+//     "https://tetime-git-blogging-rhydham14s-projects.vercel.app/",
+//     "http://localhost:3000",
+//     "http://localhost:3000/"
+//   ]
+//   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//   // allowedHeaders: "Content-Type,Authorization"
+// }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/blogs", blogRoutes);
