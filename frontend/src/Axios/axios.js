@@ -1,11 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-<<<<<<< HEAD
-  baseURL: "https://tetime-2.onrender.com/"
-=======
-  baseURL: "https://tetime-2.onrender.com",
->>>>>>> f247692a6f08e1d30aed05ac5c1467e561c16f97
+  baseURL: "https://tetime-2.onrender.com/",
+
   // Change the baseURL as needed for your API endpoint
   // Example: baseURL: "http://localhost:8080"
 });
@@ -59,8 +56,8 @@ axiosInstance.interceptors.response.use(
             "http://localhost:4000/api/users/refreshToken",
             {
               headers: {
-                "refresh-token": refreshToken
-              }
+                "refresh-token": refreshToken,
+              },
             }
           );
 
