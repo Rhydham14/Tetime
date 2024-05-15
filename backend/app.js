@@ -3,7 +3,7 @@ const cors = require("cors");
 const userRoutes = require("../backend/routes/userRoutes.js");
 const blogRoutes = require("../backend/routes/userRoutes.js");
 const PORT = process.env.PORT || 8080;
-
+require('../backend/connection/database.js');
 const app = express();
 require("dotenv").config();
 

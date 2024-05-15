@@ -38,7 +38,7 @@ const UserController = {
 
       if (userData.success) {
         const { fname, user_id } = userData;
-        const expiresIn = "15s";
+        const expiresIn = "15m";
         const token = jwt.sign({ email }, jwtSecretKey, { expiresIn });
         const refreshToken = jwt.sign({ email }, jwtSecretKey, {
           expiresIn: "30m",
@@ -69,7 +69,7 @@ const UserController = {
 
       // Generate a new access token
       const newAccessToken = jwt.sign({ email: decoded.email }, jwtSecretKey, {
-        expiresIn: "15s", // Adjust the expiry time as needed
+        expiresIn: "15m", // Adjust the expiry time as needed
       });
 
       // Send the new access token in the response
