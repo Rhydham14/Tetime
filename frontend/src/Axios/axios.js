@@ -1,10 +1,10 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: "https://tetime.onrender.com/"
 });
 
-// Request interceptor to attach authorization headers
 axiosInstance.interceptors.request.use(
   async (config) => {
     const token = localStorage.getItem("token");
@@ -21,16 +21,12 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle token refresh and other response errors
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log("Response Interceptor:", response);
-
     if (response.data.token) {
       const newToken = response.data.token;
       localStorage.setItem("token", newToken);
     }
-
     return response;
   },
   async (error) => {
@@ -41,7 +37,6 @@ axiosInstance.interceptors.response.use(
 
       if (refreshToken) {
         try {
-          console.log("Refreshing token...");
           const refreshResponse = await axios.get(
             "https://tetime.onrender.com/refresh/refreshtoken",
             {
@@ -50,21 +45,18 @@ axiosInstance.interceptors.response.use(
           );
 
           const newToken = refreshResponse.data.token;
-          console.log("New token:", newToken);
-
-          // Update the local storage with the new access token
           localStorage.setItem("token", newToken);
 
-          // Retry the original request with the new access token
-          const originalRequest = error.config;
-          originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          return axiosInstance(originalRequest);
+          // Retry the original request with the new token
+          error.config.headers.Authorization = `Bearer ${newToken}`;
+          return axiosInstance(error.config);
         } catch (refreshError) {
           console.error("Error refreshing access token:", refreshError);
 
           if (refreshError.response && refreshError.response.status === 401) {
-            console.log("Refresh token has expired");
-            // Handle token expiration (e.g., perform logout)
+            // Redirect to login or handle token expiration
+            const navigate = useNavigate();
+            navigate("/dashboard");
           }
 
           return Promise.reject(refreshError);

@@ -12,11 +12,11 @@ router.post("/register", UserController.register);
 
 router.post("/writeblog", upload.single("file"), blogController.writeblog);
 
-router.get("/readblog", auth, blogController.readblog);
+router.get("/readblog", blogController.readblog);
 
 router.get("/userblog", blogController.userblog);
 
-router.get("/blogread", blogController.blogread);
+router.get("/blogread", auth, blogController.blogread);
 
 router.delete("/deleteblog", blogController.deleteblog);
 
