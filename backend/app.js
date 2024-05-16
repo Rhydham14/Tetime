@@ -16,7 +16,8 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors({origin:[
   "https://tetime.vercel.app/","https://tetime.vercel.app",
-  "https://tetime-2.vercel.app/","https://tetime-2.vercel.app"
+  "https://tetime-2.vercel.app/","https://tetime-2.vercel.app",
+  "http://localhost:3000/","http://localhost:3000"
   
 
 ],methods: "GET,HEAD,PUT,PATCH,POST,DELETE",

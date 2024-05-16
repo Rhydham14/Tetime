@@ -1,26 +1,21 @@
-// const { readblog } = require("../controller/blogController");
 const Blogg = require("../model/blogModel");
-// const usercontroller = require("../controller/userController");
-// const userModel = require("../model/userModel");
+
 
 const blogService = {
   writeblog: async (blogData, file) => {
     try {
-      const { title, discription, user_id } = blogData;
+      const { title, discription, user_id, imageUrl } = blogData;
 
       // Check if image object and its properties are defined
 
       // Create a new blog document
       const newBlog = await Blogg.create({
-        title,
+        title,  
         discription,
         user_id,
-        filename: file.originalname,
-        contentType: file.mimetype,
-        file: file.buffer, // Store the file data directly in the 'file' field
+        imageUrl
       });
 
-      // console.log("Blog created:", newBlog);
       return newBlog;
     } catch (error) {
       console.error("Error creating blog:", error);
@@ -28,33 +23,32 @@ const blogService = {
     }
   },
 
+ 
   readblog: async () => {
     try {
       // Query all blog documents from the database
       const blogData = await Blogg.find({});
-
-      // Map over each blog document to format and include image data
+  
+      // Map over each blog document to include image URL
       const blogsWithImageData = blogData.map((blog) => {
         return {
           _id: blog._id,
           title: blog.title,
           discription: blog.discription,
           user_id: blog.user_id,
-          filename: blog.filename,
-          contentType: blog.contentType,
-          // Convert binary image data to Base64 string
-          imageData: blog.file.toString("base64"),
+          imageUrl: blog.imageUrl, // Retrieve imageUrl from blog document
           date: blog.date,
-          // __v: blog.__v,
         };
       });
-
+  
       return blogsWithImageData;
     } catch (error) {
       console.error("Error fetching blog data:", error);
       throw error;
     }
   },
+  
+  
   userblog: async (user_id) => {
     try {
       const userBlogs = await Blogg.find({ user_id }).select(
@@ -65,33 +59,31 @@ const blogService = {
       throw error;
     }
   },
+
   blogread: async (_id) => {
     try {
       // Find the blog document by its _id
       const blog = await Blogg.findById(_id);
-
+  
       if (!blog) {
         throw new Error("Blog not found");
       }
-
-      // Convert binary image data to Base64 string
-      const imageData = blog.file.toString("base64");
-
-      // Return the transformed blog data object
+  
+      // Return the blog data object with imageUrl
       return {
         _id: blog._id,
         title: blog.title,
-        discription: blog.discription, // assuming the field name is 'description'
+        discription: blog.discription,
         user_id: blog.user_id,
-        filename: blog.filename,
-        contentType: blog.contentType,
-        imageData: imageData,
+        imageUrl: blog.imageUrl, // Retrieve imageUrl from blog document
         date: blog.date,
       };
     } catch (error) {
       throw error;
     }
   },
+  
+  
   deleteblog: async (_id) => {
     try {
       const deleteblog = await Blogg.findByIdAndDelete({ _id });

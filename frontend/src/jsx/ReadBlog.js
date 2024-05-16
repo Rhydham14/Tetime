@@ -1,59 +1,60 @@
 import React, { useState, useEffect } from "react";
-// import Sidebar from "./Sidebar";
 import { Link, useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-// import axios from "axios";
 import axiosInstance from '../Axios/axios';
 
-// import Blog from '../jsx/Blog';
-
-
 const ReadBlog = () => {
-    const {_id} = useParams();
-    console.log("blod id", _id);
-    const [blogData, setBlogData] = useState({title: '', discription:''});
-    useEffect(()=>{
-        const getData = async ()=>{
-            try{
-                const response = await axiosInstance.get(`/api/blogs/blogread/?_id=${_id}`);
-                // const {title, discription} = ;
-                setBlogData(response.data);
-            }catch(e){
-                return e;
-            }
-        }
-        getData(); 
-    },[_id]);
-  return <>
-    <div className="container-fluid">
-        <div className="row m-2">
-            <div className="col-sm-2 ">
+    const { _id } = useParams();
+    const [blogData, setBlogData] = useState({ title: '', description: '', imageUrl: '' });
 
-                 <button className="btn btn-dark ">
-                  <Link to="/Blog" id="lnk" style={{color:"white", textDecoration:"none"}} className="pt-5"><ChevronLeftIcon/>Black</Link>
-                </button>
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axiosInstance.get(`/api/blogs/blogread/?_id=${_id}`);
+                setBlogData(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [_id]);
+
+    return (
+        <div className="container-fluid">
+            <div className="row m-2">
+                <div className="col-sm-2">
+                    <button className="btn btn-dark">
+                        <Link to="/Blog" id="lnk" style={{ color: "white", textDecoration: "none" }}>
+                            <ChevronLeftIcon /> Back
+                        </Link>
+                    </button>
+                </div>
+                <div className="col-sm-10">
+                    <h2>Title:</h2>
+                    <h3>{blogData.title}</h3>
+                </div>
             </div>
-            <div className="col-sm-10">
-                <h2>Title:</h2>
-                <h3>{blogData.title}</h3>
+            <hr />
+            {/* Image and Description */}
+            <div className="row">
+                <div className="col-sm-6">
+                    {blogData.imageUrl && (
+                        <img
+                            src={blogData.imageUrl}
+                            alt={blogData.title}
+                            style={{ height: "200px", objectFit: "cover" }}
+                        />
+                    )}
+                </div>
+                <div className="col-sm-6">
+                    <h5>Description:</h5>
+                    <p>{blogData.description}</p>
+                </div>
             </div>
         </div>
-        <hr></hr>
-        {/* Image and discription */}
-        <div className="row">
-            <div className="col-sm-6">
-            <img src={`data:${blogData.contentType};base64,${blogData.imageData}`} alt={blogData.title} style={{ height: "200px", objectFit: "cover" }} />
-            </div>
-            <div className="col-sm-6">
-                <h5>Discription:</h5><br/>
-                <p>{blogData.discription}</p>
-            </div>
-        </div>
-    </div>
-                 
-             
-    </>;
+    );
 };
 
 export default ReadBlog;

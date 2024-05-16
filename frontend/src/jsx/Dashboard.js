@@ -4,7 +4,7 @@ import Sidebar from "../jsx/Sidebar";
 import "../css/Dashboard.css";
 import Footer from "../jsx/Footer";
 import axiosInstance from "../Axios/axios";
-import { TailSpin } from "react-loader-spinner"; 
+import { TailSpin } from "react-loader-spinner";
 
 const Dashboard = () => {
   const [blogData, setBlogData] = useState([]);
@@ -27,18 +27,17 @@ const Dashboard = () => {
 
   return (
     <>
-    {isLoading ? (
-        < TailSpin
+      {isLoading ? (
+        <TailSpin
           type="TailSpin"
           color="#00BFFF"
           height={80}
           width={80}
           timeout={3000} // 3 secs timeout
-          display= "flex"
-          justify-content= "center"
-          align-items= "center"
-        />):(
-          <div className="container-fluid" id="dash">
+          className="loader"
+        />
+      ) : (
+        <div className="container-fluid" id="dash">
           <div className="row">
             <Sidebar />
             <div className="col-sm-10">
@@ -53,29 +52,29 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="container-fluid">
-          <div className="row bg-light">
-            <h3 className="text-center text-danger">Explore Blogs</h3>
-            {blogData && blogData.length > 0 ? (
-              blogData.map(blog => (
-                <div key={blog._id} className="col-sm-6">
-                  <div className="card mb-3">
-                    {/* Assuming 'blog.image' contains the image URL or Base64 data */}
-                    <img src={`data:${blog.contentType};base64,${blog.imageData}`} className="card-img-top" style={{ height: "200px", objectFit: "cover" }}  alt={blog.title} />
-                    <div className="card-body">
-                      <h5 className="card-title">{blog.title}</h5>
-                      {/* <p className="card-text">{blog.discription}</p> */}
+            <div className="row bg-light">
+              <h3 className="text-center text-danger">Explore Blogs</h3>
+              {blogData && blogData.length > 0 ? (
+                blogData.map(blog => (
+                  <div key={blog._id} className="col-sm-6">
+                    <div className="card mb-3">
+                      <img src={blog.imageUrl} className="card-img-top" style={{ height: "200px", objectFit: "cover" }} alt={blog.title} />
+                      <div className="card-body">
+                        <h5 className="card-title">{blog.title}</h5>
+                        {/* Uncomment the line below to display blog description */}
+                        {/* <p className="card-text">{blog.description}</p> */}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            ) : (
-              <p className="text-center">No blogs available</p>
-            )}
-          </div>
+                ))
+              ) : (
+                <p className="text-center">No blogs available</p>
+              )}
+            </div>
           </div>
         </div>
-        )}
-     
+      )}
+
       <Footer />
     </>
   );

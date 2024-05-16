@@ -7,9 +7,7 @@ const blogSchema = new mongoose.Schema({
     default: Date.now,
   },
   user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  filename: String,
-  contentType: String,
-  file: Buffer 
+  imageUrl: { type: String, required: true }, 
 });
 
 const blogModel = mongoose.model("Blogg", blogSchema);

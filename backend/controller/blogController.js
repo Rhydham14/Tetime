@@ -1,4 +1,3 @@
-const { log } = require("console");
 const blogService = require("../service/blogService");
 // const crypto = require('crypto');
 
@@ -6,9 +5,13 @@ const blogController = {
   writeblog: async (req, res) => {
     try {
       const { title, discription, user_id } = req.body;
-      const file = req.file;
+      if (!req.file) {
+        return res.status(400).json({ error: "No image file uploaded" });
+      }
+      const imageUrl = req.file.path; // Cloudinary URL
 
-      const writeblog = await blogService.writeblog({ title, discription, user_id }, file);
+      const writeblog = await blogService.writeblog({ title, discription, user_id,  imageUrl });
+
       res.status(201).json({ message: "Blog added", writeblog });
     } catch (e) {
       console.log("controller error", e);
