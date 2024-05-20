@@ -6,7 +6,7 @@ import axiosInstance from '../Axios/axios';
 
 const ReadBlog = () => {
     const { _id } = useParams();
-    const [blogData, setBlogData] = useState({ title: '', description: '', imageUrl: '' });
+    const [blogData, setBlogData] = useState({ title: '', discription: '', imageUrl: '' });
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,7 +37,7 @@ const ReadBlog = () => {
                 </div>
             </div>
             <hr />
-            {/* Image and Description */}
+            {/* Image and discription */}
             <div className="row">
                 <div className="col-sm-6">
                     {blogData.imageUrl && (
@@ -49,8 +49,8 @@ const ReadBlog = () => {
                     )}
                 </div>
                 <div className="col-sm-6">
-                    <h5>Description:</h5>
-                    <p>{blogData.description}</p>
+                    <h5>discription:</h5>
+                    <p>{blogData.discription}</p>
                 </div>
             </div>
         </div>
