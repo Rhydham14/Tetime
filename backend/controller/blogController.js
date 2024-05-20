@@ -4,22 +4,6 @@ const redisClient = require('../middleware/redis');
 
 
 const blogController = {
-  // writeblog: async (req, res) => {
-  //   try {
-  //     const { title, discription, user_id } = req.body;
-  //     if (!req.file) {
-  //       return res.status(400).json({ error: "No image file uploaded" });
-  //     }
-  //     const imageUrl = req.file.path; // Cloudinary URL
-
-  //     const writeblog = await blogService.writeblog({ title, discription, user_id,  imageUrl });
-
-  //     res.status(201).json({ message: "Blog added", writeblog });
-  //   } catch (e) {
-  //     console.log("controller error", e);
-  //     res.status(500).json({ message: "Something went wrong", error: e.message });
-  //   }
-  // },
 
   writeblog: async (req, res) => {
     try {

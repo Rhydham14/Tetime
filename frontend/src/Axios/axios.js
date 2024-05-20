@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// const axiosInstance = axios.create({
-//   baseURL: "https://tetime.onrender.com/"
-// });
-
-
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/"
+  baseURL: "https://tetime.onrender.com/"
 });
+
+
+// const axiosInstance = axios.create({
+//   baseURL: "http://localhost:8080/"  
+// });
 
 axiosInstance.interceptors.request.use(
   async (config) => {
