@@ -40,7 +40,6 @@ const blogController = {
       
       if (cachedBlogs) {
         // If cache hit, parse and return the cached data
-        // console.log("cachedblog", cachedBlogs);
         return res.status(200).json(JSON.parse(cachedBlogs));
       }
       
@@ -48,8 +47,9 @@ const blogController = {
       const blogData = await blogService.readblog();
       
       // Store the fetched data in Redis cache
-      await redisClient.set(cacheKey, JSON.stringify(blogData), 'EX', 3600); // Cache for 1 hour
-      
+      await redisClient.set(cacheKey, JSON.stringify(blogData), 'EX', 36); // Cache for 1 hour
+      await redisClient.del('allBlogs');
+
       // Return the fetched data
       res.status(200).json(blogData);
     } catch (error) {
